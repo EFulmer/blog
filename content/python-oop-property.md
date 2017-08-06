@@ -2,13 +2,11 @@ Title: Object-Oriented Programming in Python 1: @property
 Date: 2017-07-25
 Category: Programming
 
-Coming from Java, one of the things that initially confused me about Python was the lack of private attributes, getters, and setters. How were you supposed to control access to your objects' inner workings?
+Coming from Java, one of the things that initially confused me about Python was the lack of private attributes, getters, and setters. How were you supposed to control access to your objects' inner workings? Even if you don't come from a language with private member variables, you might still ask the same question about hiding your objects' inner machinery from other programmers.
 
-Even if you don't come from a language with private member variables, you might still ask the same question about hiding your objects' inner machinery from other programmers.
+Obviously, Python's design philosophy is vastly different than Java's. While information hiding isn't really supported, you _can_ create getters and setters for attributes.
 
-Obviously, Python's design philosophy is vastly different than Java's. While information hiding isn't really supported (though there are easily available language mechanisms that *discourage* other programmers from touching object attributes), you _can_ create getters and setters for attributes.
-
-You turn an attribute from an ordinary Python object into one treated as a special class attribute, with unique getter, setter, and deleter behavior by creating a `property` object.
+You turn an attribute from an ordinary Python object into one treated as a special class attribute, with unique getter, setter, and deleter behavior, by creating a `property` object.
 
 From the documentation:
 
@@ -22,13 +20,9 @@ class property(object)
  |  
 ```
 
-`property` is a special builtin class. Instances of property have attributes for getting, setting, and deleting a value. When you make a property, you can define any or all of these attributes; ones that don't get defined default to the standard get/set/delete behavior.
+`property` is a special builtin class. Instances of property have attributes for getting, setting, and deleting a value. When you make a property, you can define any or all of these attributes; ones that aren't defined default to the standard get/set/delete behavior.
 
-There are two ways to create a property object:
-1. Use decorators. Decorators are an advanced Python feature and can look like magic, but using decorators to create a property is more Pythonic.
-2. Define the getters, setters, and deleters for your property in the class body, then call `property` like a constructor to create a decorator using your getter and setter.
-
-An example of #2 first:
+Here's an example. We'll define the getters, setters, and deleters for your property in the class body, then call `property` like a constructor to create a `property` using the getter and setter.
 
 ```
 class Ramone(object):
@@ -59,7 +53,7 @@ Simple, but we'll go through them one-by-one:
 * The `setter` needs to take `self` and a value to update the attribute with. No return, because the computation is changing an attribute on `self`. For the sake of historical accuracy, Ramones can only count to four.
 * The `deleter` deletes the attribute. Simple... though `del` is a little less obvious than it sounds, but we'll tackle that in the future.
 
-This example bothers me because `countdown_getter`, `setter`, and `deleter` are all still visible and callable under those names. The purpose of defining them may not be immediately clear to readers of the code until they get to the line where `property` is called.
+This example bothers me because `countdown_getter`, `setter`, and `deleter` are all still visible and callable under those names. The purpose of defining them may not be immediately clear to readers of the code until they get to the line where `property` is called. We can solve this with decorators. Decorators are an advanced Python feature and can look like magic, but using decorators to create a property is more idiomatic to Python.
 
 Here's the decorator version:
 
@@ -91,3 +85,4 @@ This version is clearer because you can see that `countdown` is a property as so
 The gist of what it does is that the name following the `@` sign is a function's name. That function gets used to "decorate" the function you define, augmenting it with additional behavior. In this case, the function gets the get/set/delete machinery added to it.
 
 We'll come back to hiding data inside objects later. Next time, we continue looking at how we can override attribute access and modification.
+
