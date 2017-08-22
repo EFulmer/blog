@@ -1,3 +1,6 @@
 [submodule "themes/pelican-blueidea"]
 	path = themes/pelican-blueidea
 	url = https://github.com/nasskach/pelican-blueidea/
+[submodule "themes/voidy-bootstrap"]
+	path = themes/voidy-bootstrap
+	url = https://github.com/robulouski/voidy-bootstrap/

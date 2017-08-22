@@ -1,6 +1,9 @@
 Title: Object-Oriented Programming in Python 1: @property
 Date: 2017-07-25
 Category: Programming
+Tags: Python, OOP, Datamodel
+
+*This is the first in a series of posts exploring different aspects of object-oriented programming in Python.*
 
 Coming from Java, one of the things that initially confused me about Python was the lack of private attributes, getters, and setters. How were you supposed to control access to your objects' inner workings? Even if you don't come from a language with private member variables, you might still ask the same question about hiding your objects' inner machinery from other programmers.
 
