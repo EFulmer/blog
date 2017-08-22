@@ -2,3 +2,5 @@ output/
 __pycache__/
 *.pid
 themes/pelican-blueidea
+themes/voidy-bootstrap
+*.swp
